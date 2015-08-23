@@ -81,7 +81,6 @@ Only for SyncTo. SQL is create on Server and send to the client.
         }
     }
 
-
 syncAdditionalMaintenance
 -------------------------
 Called after the maintenance from syncCto.

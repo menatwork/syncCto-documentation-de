@@ -4,7 +4,7 @@ Glossar
 C
 -
 Client:
-    Der entfernte Server wird im allgemeinen als Client benannt.
+    Der entfernte Server wird im Allgemeinen als Client benannt.
 
 L
 -
