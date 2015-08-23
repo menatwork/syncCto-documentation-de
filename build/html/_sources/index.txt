@@ -55,6 +55,15 @@ Einstellungen
 
     settings/*
 
+Workflow
+--------
+
+.. toctree::
+    :glob:
+    :maxdepth: 2
+
+    workflow/*
+
 Hook
 ----
 

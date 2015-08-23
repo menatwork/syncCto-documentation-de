@@ -33,3 +33,14 @@ Standard Ports:
     - HTTPS
         Port 443
 
+HTTP-Authentifizierung aktivieren
+---------------------------------
+Wenn aktiviert ist es möglich, das SyncCto eine Installation aufrufen kann, welche mit einer Htaccess und Htpasswd geschützt ist.
+
+Benutzername
+------------
+Benutzername für den Htaccess Schutz.
+
+Passwort
+--------
+Passwort für den Htaccess Schutz.
