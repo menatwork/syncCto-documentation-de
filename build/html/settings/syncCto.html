@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Einstellungen SyncCto &mdash; SyncCto - Handbuch 0.0.1 Dokumentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="SyncCto - Handbuch 0.0.1 Dokumentation" href="../index.html" />
+    <link rel="next" title="Glossar" href="../miscellaneous/glossar.html" />
+    <link rel="prev" title="SyncCto - Handbuch" href="../index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="einstellungen-synccto">
+<h1>Einstellungen SyncCto<a class="headerlink" href="#einstellungen-synccto" title="Link zu dieser Überschrift">¶</a></h1>
+<div class="section" id="vorwort">
+<h2>Vorwort<a class="headerlink" href="#vorwort" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Die Einstellungen von SyncCto sind im Menü unter dem Punkt &#8220;Synchronisation/Konfiguration&#8221; zu finden.</p>
+<p>Hier können diverse Blacklisten/Whitelisten eingestellt werden.</p>
+</div>
+<div class="section" id="dateien-und-ordner-auschlieszen">
+<h2>Dateien und Ordner auschließen<a class="headerlink" href="#dateien-und-ordner-auschlieszen" title="Link zu dieser Überschrift">¶</a></h2>
+<dl class="docutils">
+<dt>Ordner:</dt>
+<dd><p class="first">Alle Ordner die in dieser Liste stehen werden nicht geprüft, dementsprechend werden die Daten auch nicht übertragen.</p>
+<p class="last">Es ist möglich Pfade direkt vom Root anzugeben &#8220;system/html&#8221; oder mit Wildcards zu arbeiten. Hierbei gib es allerdings nur die Möglichkeit mit dem <a href="#id1"><span class="problematic" id="id2">*</span></a>-Operator zu arbeiten. So können zum Beispiel alle Verzeichnise die &#8220;htlm&#8221; im Namen haben, ignoriert werden.</p>
+</dd>
+<dt>Dateien:</dt>
+<dd><p class="first">Genau wie bei den Ordnern, ist er Möglich einzelne Dateien auf die Ignorlieste zu setzten.</p>
+<ul class="last">
+<li><dl class="first docutils">
+<dt>Alle Dateien mit dem gleichen Name</dt>
+<dd><p class="first last">Sollte nur eine Dateiname angegeben werden, so werden alle Dateien mit diesem Namen ignoriert.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Datei mit einem Bestimmten Pfad</dt>
+<dd><p class="first last">Wird zuzätlch zum Dateiname noch ein Pfad angegeben, wird nur diese eine Datei ignoriert.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Dateien im TL_ROOT</dt>
+<dd><p class="first last">Sollen Dateien im TL_ROOT ignoriert werden, muss ein &#8220;TL_ROOT&#8221; hinzugefügt werden.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="erlaubte-ordner-im-stammverzeichnis-erlaubte-ordner">
+<h2>Erlaubte Ordner im Stammverzeichnis - Erlaubte Ordner<a class="headerlink" href="#erlaubte-ordner-im-stammverzeichnis-erlaubte-ordner" title="Link zu dieser Überschrift">¶</a></h2>
+<p>In dieser Liste werden alle Ordner angegeben, die synchronisiert werden sollen. Dies ist dafür gut wenn neben der Contao Installatrion noch andere CMS oder Foren installiert sind, die nicht Syncronisiert werden sollen.</p>
+<p>Sollte eine Erweiterung wie Isotope installiert sein, müssen die zusätzlichen Ordner die im Root von Contao angelegt wurden hier hinzugefügt werden. Da sonst die Bilder des Shops nicht mit hochgeladen werden.</p>
+</div>
+<div class="section" id="localconfig-php-eintrage-auschlieszen">
+<h2>localconfig.php Einträge auschließen<a class="headerlink" href="#localconfig-php-eintrage-auschlieszen" title="Link zu dieser Überschrift">¶</a></h2>
+<p>In dieser Liste werden alle Einträge ausgegeben die in der Localconfig stehen oder stehen könnten. Hierbei werden die DCA Dateien ausgelesen um alles Einstellungen zu ermittelnt. Jeder aktivierte Einstellung wird nicht auf den Client übertragen.</p>
+</div>
+<div class="section" id="nicht-empfohlene-tabellen">
+<h2>Nicht empfohlene Tabellen<a class="headerlink" href="#nicht-empfohlene-tabellen" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Diese Liste enthält alle Datenbanken-Tabellen des Systems. Jede Tabelle die hier aktiviert ist, wird wärend der syncronisation als &#8220;Nicht empfohlen&#8221; angezteigt. Dies beteutet das ein BEnutzter einen Hinweis bekommt, das diese Tabellen empfindlich sind. Allerdings können Sie nocht immer übertragen werden.</p>
+</div>
+<div class="section" id="versteckte-tabellen">
+<h2>Versteckte Tabellen<a class="headerlink" href="#versteckte-tabellen" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Diese Liste enthält alle Datenbank-Tabellen des Systems. Jede Tabelle die hier aktiviert ist, wird nicht in der syncronisation angezeigt und auch nicht im Backup Menü.</p>
+</div>
+<div class="section" id="experten-einstellungen">
+<h2>Experten-Einstellungen<a class="headerlink" href="#experten-einstellungen" title="Link zu dieser Überschrift">¶</a></h2>
+<dl class="docutils">
+<dt>Debugmodus aktivieren:</dt>
+<dd>Wenn aktiviert, werden zusätzliche Inhalte wärend der syncronisation ausgegeben. Zudem wird eine Log-Datei erstellt welche die Kommunikation wiederspiegelt.</dd>
+</dl>
+<p>Experten-Einstellungen aktivieren:</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>&#8220;wait_timeout&#8221; konfigurieren</dt>
+<dd><p class="first last">Diese Wert wird in der Verbindung mit &#8220;MySQL Server has gone away&#8221; verwendet. Sollte dieser Fehle auftretten lhnt es sich den Wert auf &#8220;28000&#8221; zu setzten.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>&#8220;interactive_timeout&#8221; konfigurieren</dt>
+<dd><p class="first last">Diese Wert wird in der Verbindung mit &#8220;MySQL Server has gone away&#8221; verwendet. Sollte dieser Fehle auftretten lhnt es sich den Wert auf &#8220;28000&#8221; zu setzten.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Datenbank Abfragelimit</dt>
+<dd><p class="first last">Diese Wert wird in der Verbindung mit &#8220;MySQL Server has gone away&#8221; verwendet. Sollte dieser Fehle auftretten lhnt es sich den Wert auf &#8220;500&#8221; zu setzten.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>Automatische Aktualisierung der Datenbank:</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Inhalt</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Einstellungen SyncCto</a><ul>
+<li><a class="reference internal" href="#vorwort">Vorwort</a></li>
+<li><a class="reference internal" href="#dateien-und-ordner-auschlieszen">Dateien und Ordner auschließen</a></li>
+<li><a class="reference internal" href="#erlaubte-ordner-im-stammverzeichnis-erlaubte-ordner">Erlaubte Ordner im Stammverzeichnis - Erlaubte Ordner</a></li>
+<li><a class="reference internal" href="#localconfig-php-eintrage-auschlieszen">localconfig.php Einträge auschließen</a></li>
+<li><a class="reference internal" href="#nicht-empfohlene-tabellen">Nicht empfohlene Tabellen</a></li>
+<li><a class="reference internal" href="#versteckte-tabellen">Versteckte Tabellen</a></li>
+<li><a class="reference internal" href="#experten-einstellungen">Experten-Einstellungen</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="vorheriges Kapitel">SyncCto - Handbuch</a></li>
+      <li>Next: <a href="../miscellaneous/glossar.html" title="nächstes Kapitel">Glossar</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Diese Seite</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/settings/syncCto.txt"
+            rel="nofollow">Quellcode anzeigen</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Los" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Geben Sie Suchbegriffe oder einen Modul-, Klassen- oder Funktionsnamen ein.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Stefan Heimes.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="../_sources/settings/syncCto.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

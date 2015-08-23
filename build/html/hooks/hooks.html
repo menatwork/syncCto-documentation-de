@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Hooks &mdash; SyncCto - Handbuch 0.0.1 Dokumentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/translations.js"></script>
+    <link rel="top" title="SyncCto - Handbuch 0.0.1 Dokumentation" href="../index.html" />
+    <link rel="next" title="Glossar" href="../miscellaneous/glossar.html" />
+    <link rel="prev" title="Einstellungen SyncCto" href="../settings/syncCto.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="hooks">
+<h1>Hooks<a class="headerlink" href="#hooks" title="Link zu dieser Überschrift">¶</a></h1>
+<div class="section" id="syncexecutefinaloperations">
+<h2>syncExecuteFinalOperations<a class="headerlink" href="#syncexecutefinaloperations" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Call user functions like update db, remove files or anything else.
+Called after main synchronisation (db, files, maintenance).
+Called directly on the client.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">// config.php</span>
+<span class="x">$GLOBALS[&#39;TL_HOOKS&#39;][&#39;syncExecuteFinalOperations&#39;][] = array(&#39;MyClass&#39;, &#39;MyFunction&#39;);</span>
+
+<span class="x">// Class file.</span>
+<span class="x">class MyClass extends \Backend</span>
+<span class="x">{</span>
+<span class="x">    public function MyFunction()</span>
+<span class="x">    {</span>
+<span class="x">            // Do something</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="syncdbupdate">
+<h2>syncDBUpdate<a class="headerlink" href="#syncdbupdate" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Execute SQL-Commands after DB synchronisation.
+Only for SyncTo. SQL is create on Server and send to the client.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">// config.php</span>
+<span class="x">$GLOBALS[&#39;TL_HOOKS&#39;][&#39;syncDBUpdate&#39;][] = array(&#39;MyClass&#39;, &#39;MyFunction&#39;);</span>
+
+<span class="x"> // Class file.</span>
+<span class="x">class MyClass extends \Backend</span>
+<span class="x">{</span>
+<span class="x">    public function MyFunction($intClientID, $arrSQL)</span>
+<span class="x">    {</span>
+<span class="x">        // Do something</span>
+
+<span class="x">        // Merge last sql with new ones</span>
+<span class="x">        return array_merge((array) $arrSQL, array(</span>
+<span class="x">                    array(</span>
+<span class="x">                        &#39;prepare&#39; =&gt; &#39;DELETE FOMR tl_content WHERE id=?&#39;,</span>
+<span class="x">                        &#39;execute&#39; =&gt; 1,</span>
+<span class="x">                    ),</span>
+<span class="x">                ));</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="syncdbupdatebeforedrop">
+<h2>syncDBUpdateBeforeDrop<a class="headerlink" href="#syncdbupdatebeforedrop" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Execute query command before the old tables are dropped.
+Temp tables get the prefix &#8220;synccto_temp_&#8221;.
+Only for SyncTo. SQL is create on Server and send to the client.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">// config.php</span>
+<span class="x">$GLOBALS[&#39;TL_HOOKS&#39;][&#39;syncDBUpdateBeforeDrop&#39;][] = array(&#39;MyClass&#39;, &#39;MyFunction&#39;);</span>
+
+<span class="x"> // Class file.</span>
+<span class="x">class MyClass extends \Backend</span>
+<span class="x">{</span>
+<span class="x">    public function MyFunction($intClientID, $arrSyncTables, $arrLastSQL)</span>
+<span class="x">    {</span>
+<span class="x">        // Do something</span>
+
+<span class="x">        // Merge last sql with new ones</span>
+<span class="x">        return array_merge( (array) $arrLastSQL ,array(</span>
+<span class="x">            array(</span>
+<span class="x">                &#39;query&#39; =&gt; &#39;DELETE ...&#39;</span>
+<span class="x">            ),</span>
+<span class="x">            array(</span>
+<span class="x">                &#39;query&#39; =&gt; &#39;INSERT INTO ...&#39;</span>
+<span class="x">            ),</span>
+<span class="x">            array(</span>
+<span class="x">                &#39;query&#39; =&gt; &#39;UPDATE ...&#39;</span>
+<span class="x">            ),</span>
+<span class="x">        ));</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="syncadditionalmaintenance">
+<h2>syncAdditionalMaintenance<a class="headerlink" href="#syncadditionalmaintenance" title="Link zu dieser Überschrift">¶</a></h2>
+<p>Called after the maintenance from syncCto.</p>
+<div class="highlight-php"><div class="highlight"><pre><span class="x">// config.php</span>
+<span class="x">$GLOBALS[&#39;TL_HOOKS&#39;][&#39;syncAdditionalMaintenance&#39;][] = array(&#39;MyClass&#39;, &#39;MyFunction&#39;);</span>
+
+<span class="x"> // Class file.</span>
+<span class="x">class MyClass extends \Backend</span>
+<span class="x">{</span>
+<span class="x">    public function MyFunction($arrSetings)</span>
+<span class="x">    {</span>
+<span class="x">            // To something</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Inhalt</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Hooks</a><ul>
+<li><a class="reference internal" href="#syncexecutefinaloperations">syncExecuteFinalOperations</a></li>
+<li><a class="reference internal" href="#syncdbupdate">syncDBUpdate</a></li>
+<li><a class="reference internal" href="#syncdbupdatebeforedrop">syncDBUpdateBeforeDrop</a></li>
+<li><a class="reference internal" href="#syncadditionalmaintenance">syncAdditionalMaintenance</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../settings/syncCto.html" title="vorheriges Kapitel">Einstellungen SyncCto</a></li>
+      <li>Next: <a href="../miscellaneous/glossar.html" title="nächstes Kapitel">Glossar</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>Diese Seite</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/hooks/hooks.txt"
+            rel="nofollow">Quellcode anzeigen</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Schnellsuche</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Los" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Geben Sie Suchbegriffe oder einen Modul-, Klassen- oder Funktionsnamen ein.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Stefan Heimes.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+      |
+      <a href="../_sources/hooks/hooks.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
